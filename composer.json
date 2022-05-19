@@ -1,0 +1,22 @@
+{
+    "name": "dlyun/dsom-paypal",
+    "description": "PayPal's PHP SDK for REST APIs",
+    "keywords": ["paypal", "payments"],
+    "type": "library",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "liuxin"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PayPal\\": "./PayPal"
+        }
+    }
+}
