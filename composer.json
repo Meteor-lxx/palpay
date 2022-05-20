@@ -3,7 +3,7 @@
     "description": "PayPal's PHP SDK for REST APIs",
     "keywords": ["paypal", "payments"],
     "type": "library",
-    "license": "Apache2",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "liuxin",
