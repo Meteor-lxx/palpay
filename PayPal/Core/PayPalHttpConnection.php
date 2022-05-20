@@ -62,10 +62,8 @@ class PayPalHttpConnection
      * @return false|string
      * @throws PayPalConnectionException
      */
-    public function execute(string $data)
+    public function execute($data)
     {
-        //Initialize the logger
-
         //Initialize Curl Options
         $ch = curl_init($this->httpConfig->getUrl());
         $options = $this->httpConfig->getCurlOptions();
@@ -98,7 +96,6 @@ class PayPalHttpConnection
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $this->httpConfig->getMethod());
         }
 
-
         //Execute Curl Request
         $result = curl_exec($ch);
         //Retrieve Response Status
@@ -106,7 +103,6 @@ class PayPalHttpConnection
 
         //Retry if Certificate Exception
         if (curl_errno($ch) == 60) {
-            curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
             $result = curl_exec($ch);
             //Retrieve Response Status
             $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -130,17 +126,10 @@ class PayPalHttpConnection
             );
         }
 
-        // Get Request and Response Headers
-        $requestHeaders = curl_getinfo($ch, CURLINFO_HEADER_OUT);
         //Using alternative solution to CURLINFO_HEADER_SIZE as it throws invalid number when called using PROXY.
         $responseHeaderSize = strlen($result) - curl_getinfo($ch, CURLINFO_SIZE_DOWNLOAD);
-        $responseHeaders = substr($result, 0, $responseHeaderSize);
         $result = substr($result, $responseHeaderSize);
-
-
-        //Close the curl request
         curl_close($ch);
-
         //More Exceptions based on HttpStatus Code
         if (in_array($httpStatus, self::$retryCodes)) {
             $ex = new PayPalConnectionException(
