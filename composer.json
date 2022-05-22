@@ -2,12 +2,11 @@
     "name": "dlyun/dsom-paypal",
     "description": "PayPal's PHP SDK for REST APIs",
     "keywords": ["paypal", "payments"],
-    "type": "library",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "authors": [
         {
-            "name": "liuxin",
-            "homepage": "https://l-xx.com"
+            "name": "Meteor",
+            "email": "liuxin.yx@qq.com"
         }
     ],
     "require": {
